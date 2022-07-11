@@ -1,0 +1,31 @@
+pipeline:
+    name: End to End
+    identifier: End_to_End
+    projectIdentifier: Demo
+    orgIdentifier: default
+    tags: {}
+    stages:
+        - stage:
+              name: Custom
+              identifier: Custom
+              description: ""
+              type: Custom
+              spec:
+                  execution:
+                      steps:
+                          - step:
+                                type: ShellScript
+                                name: Shell
+                                identifier: Shell
+                                spec:
+                                    shell: Bash
+                                    onDelegate: true
+                                    source:
+                                        type: Inline
+                                        spec:
+                                            script: echo "Hello"
+                                    environmentVariables: []
+                                    outputVariables: []
+                                    executionTarget: {}
+                                timeout: 10m
+              tags: {}
