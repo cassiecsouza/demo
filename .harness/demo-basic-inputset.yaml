@@ -1,0 +1,14 @@
+inputSet:
+  identifier: "Basic"
+  name: "Basic"
+  orgIdentifier: "default"
+  projectIdentifier: "Demo"
+  pipeline:
+    identifier: "End_to_End"
+    properties:
+      ci:
+        codebase:
+          build:
+            type: "PR"
+            spec:
+              number: "<+trigger.prNumber>"
