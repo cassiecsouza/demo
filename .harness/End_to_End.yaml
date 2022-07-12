@@ -18,7 +18,7 @@ pipeline:
                                 name: Run Tests with Intelligence
                                 identifier: runTestsWithIntelligence
                                 spec:
-                                    connectorRef: dockerhub
+                                    connectorRef: account.harnessImage
                                     image: maven:3.5.2-jdk-8-alpine
                                     language: Java
                                     buildTool: Maven
@@ -60,7 +60,7 @@ pipeline:
                         name: dind
                         type: Service
                         spec:
-                            connectorRef: account.Harness_Docker_Connector
+                            connectorRef: account.harnessImage
                             image: docker:dind
                             privileged: true
                             resources:
@@ -82,17 +82,6 @@ pipeline:
                             - AllErrors
                         action:
                             type: Ignore
-              strategy:
-                  matrix:
-                      service:
-                          - nginx
-                      env:
-                          - asset1
-                          - asset2
-                          - asset3
-                      exclude:
-                          - service: nginx
-                            env: asset2
         - stage:
               name: Deploy to Dev
               identifier: Deploy
@@ -327,6 +316,17 @@ pipeline:
               variables: []
               when:
                   pipelineStatus: Success
+              strategy:
+                  matrix:
+                      service:
+                          - nginx
+                      env:
+                          - asset1
+                          - asset2
+                          - asset3
+                      exclude:
+                          - service: nginx
+                            env: asset2
         - stage:
               name: Deploy to QA
               identifier: Deploy_to_QA
